@@ -51,3 +51,4 @@ do
         done
     done
 done
+./clear_hugepage.sh
