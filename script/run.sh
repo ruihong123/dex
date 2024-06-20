@@ -33,7 +33,7 @@ admit=0.1
 tune=0
 
 #./hugepage.sh
-./clear_hugepage.sh
+#./clear_hugepage.sh
 for uni in 0 1
 do 
     for op in 0 1 2
@@ -53,4 +53,4 @@ do
         done
     done
 done
-./clear_hugepage.sh
+#./clear_hugepage.sh
