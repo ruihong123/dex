@@ -443,7 +443,7 @@ template <class Key> struct BTreeInner : public BTreeInnerBase {
     uint64_t bitmap_right_sets = bitmap_data & (~((1ULL << bit_pos) - 1));
     if (bitmap_right_sets != 0) {
       closest_right_gap_distance =
-          static_cast<int>(_tzcnt_u64(bitmap_right_sets)) - bit_pos;
+          static_cast<int>(__builtin_ctzll(closest_right_gap_distance)) - bit_pos;
     }
 
     // Logically sets to the left of pos, in the bitmap these are sets to the
@@ -453,10 +453,10 @@ template <class Key> struct BTreeInner : public BTreeInnerBase {
     if (bitmap_left_sets != 0) {
 //        unsigned long index;
 //        _BitScanReverse64(&index, bitmap_left_sets);
-//        closest_left_gap_distance =
-//                bit_pos - (63 - static_cast<int>(_lzcnt_u64(index)));
-      closest_left_gap_distance =
-          bit_pos - (63 - static_cast<int>(_lzcnt_u64(bitmap_left_sets)));
+        closest_left_gap_distance =
+                bit_pos - (63 - static_cast<int>(__builtin_clzll(bitmap_left_sets)));
+//      closest_left_gap_distance =
+//          bit_pos - (63 - static_cast<int>(_lzcnt_u64(bitmap_left_sets)));
     }
 
     if (closest_right_gap_distance < closest_left_gap_distance &&
