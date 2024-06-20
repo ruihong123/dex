@@ -17,7 +17,7 @@ endif()
 
 #Compiler options
 # set(CMAKE_C_FLAGS "-Wall -Wno-deprecated-declarations -Wsign-compare -DNDEBUG -g")
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++17 -march=native")
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++17 -march=native -Wall -Wextra")
 
 # Link Options
 set(LINKS_FLAGS "-lcityhash -lboost_system -lboost_coroutine -lpthread -libverbs -lmemcached -ltbb -lnuma")
