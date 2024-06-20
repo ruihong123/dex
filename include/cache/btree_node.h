@@ -10,7 +10,9 @@
 #include <sched.h>
 #include <unordered_map>
 #include <utility>
-
+//#include <x86intrin.h>
+//#include <intrin.h>
+#include <ammintrin.h>
 namespace cachepush {
 // #define MINI 1
 
@@ -448,6 +450,10 @@ template <class Key> struct BTreeInner : public BTreeInnerBase {
     // cover idx: [0, pos - 1]
     uint64_t bitmap_left_sets = bitmap_data & ((1ULL << bit_pos) - 1);
     if (bitmap_left_sets != 0) {
+//        unsigned long index;
+//        _BitScanReverse(&index, bitmap_left_sets);
+//        closest_left_gap_distance =
+//                bit_pos - (63 - static_cast<int>(_lzcnt_u64(index)));
       closest_left_gap_distance =
           bit_pos - (63 - static_cast<int>(_lzcnt_u64(bitmap_left_sets)));
     }
