@@ -33,13 +33,13 @@ admit=0.1
 tune=0
 
 ./hugepage.sh
-for uni in (0 1)
+for uni in 0 1
 do 
-    for op in (0 1 2)
+    for op in 0 1 2
     do 
         for idx in 0
         do
-          for cache_size in (6 7)
+          for cache_size in 6 7
                   do
             for t in 4
             do
