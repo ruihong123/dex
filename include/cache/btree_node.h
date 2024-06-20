@@ -445,7 +445,7 @@ template <class Key> struct BTreeInner : public BTreeInnerBase {
 //        closest_left_gap_distance =
 //          bit_pos - (63 - static_cast<int>(_tzcnt_u64(bitmap_left_sets)));
       closest_right_gap_distance =
-          static_cast<int>(__builtin_ctzll(closest_right_gap_distance)) - bit_pos;
+          static_cast<int>(__builtin_ctzll(bitmap_right_sets)) - bit_pos;
     }
 
     // Logically sets to the left of pos, in the bitmap these are sets to the
