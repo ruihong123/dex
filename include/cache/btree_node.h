@@ -10,9 +10,10 @@
 #include <sched.h>
 #include <unordered_map>
 #include <utility>
-//#include <x86intrin.h>
-//#include <intrin.h>
+#include <x86intrin.h>
+#include <intrin.h>
 #include <ammintrin.h>
+#include <immintrin.h>
 namespace cachepush {
 // #define MINI 1
 
