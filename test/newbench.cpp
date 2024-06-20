@@ -389,7 +389,7 @@ void parse_args(int argc, char *argv[]) {
   cache_mb = atoi(argv[9]);
   uniform_workload = atoi(argv[10]);
   zipfian = atof(argv[11]);
-  bulk_load_num = atoi(argv[12]) * 1000 * 1000;
+  bulk_load_num = atoi(argv[12]) * 1024ull * 1024ull;
   warmup_num = atoi(argv[13]) * 1000 * 1000;
   op_num = atoi(argv[14]) * 1000 * 1000; // Here is total op_num => need to be
                                          // distributed across the bechmark
