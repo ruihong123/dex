@@ -32,7 +32,8 @@ rpc=0
 admit=0.1
 tune=0
 
-./hugepage.sh
+#./hugepage.sh
+./clear_hugepage.sh
 for uni in 0 1
 do 
     for op in 0 1 2
