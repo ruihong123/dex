@@ -18,7 +18,7 @@ mem_threads=(0 4)
 cache=(0 64 128 256 512 1024 2048 8192)
 uniform=(0 1)
 zipf=(0.99)
-bulk=2048
+bulk=50
 warmup=10
 runnum=50
 nodenum=8
@@ -40,12 +40,13 @@ do
     do
         for idx in 0
         do
-          for cache_size in 6 7
+          for cache_size in 4 5 6
                   do
             for t in 4
             do
 #                ./restartMemc.sh
-                sudo ../build/newbench $nodenum ${read[$op]} ${insert[$op]} ${update[$op]} ${delete[$op]} ${range[$op]} ${threads[$t]} ${mem_threads[1]} ${cache[$cache_size]} $uni ${zipf[0]} $bulk $warmup $runnum $correct $timebase $early $idx $rpc $admit $tune 36
+                ulimit -c 38000000
+                sudo ../build/newbench $nodenum ${read[$op]} ${insert[$op]} ${update[$op]} ${delete[$op]} ${range[$op]} ${threads[$t]} ${mem_threads[1]} ${cache[$cache_size]} $uni ${zipf[0]} $bulk $warmup $runnum $correct $timebase $early $idx $rpc $admit $tune 8
                 sleep 2
             done
           done
