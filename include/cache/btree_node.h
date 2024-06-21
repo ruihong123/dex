@@ -426,11 +426,6 @@ template <class Key> struct BTreeInner : public BTreeInnerBase {
 
   bool test_bimap(int idx) { return bitmap & (1ULL << idx); }
 
-    // write a substitute function for _lzcnt_u64
-    int _lzcnt_u64(uint64_t x) {
-        return 64 - __builtin_clzll(x);
-    }
-
   // Returns position of closest 1 to pos
   // Returns pos if pos is a set
   int closest_set(int pos) const {
@@ -460,10 +455,10 @@ template <class Key> struct BTreeInner : public BTreeInnerBase {
     if (bitmap_left_sets != 0) {
 //        unsigned long index;
 //        _BitScanReverse64(&index, bitmap_left_sets);
-//        closest_left_gap_distance =
-//                bit_pos - (63 - static_cast<int>(__builtin_clzll(bitmap_left_sets)));
-      closest_left_gap_distance =
-          bit_pos - (63 - static_cast<int>(_lzcnt_u64(bitmap_left_sets)));
+        closest_left_gap_distance =
+                bit_pos - (63 - static_cast<int>(__builtin_clzll(bitmap_left_sets)));
+//      closest_left_gap_distance =
+//          bit_pos - (63 - static_cast<int>(_lzcnt_u64(bitmap_left_sets)));
 
     }
 
