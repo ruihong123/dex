@@ -64,15 +64,15 @@ bool createContext(RdmaContext *context, uint8_t port, int gidIndex,
         goto CreateResourcesExit;
     }
     ibv_query_device(ctx, &(device_attr));
-    std::cout << "maximum outstanding wr number is"  << device_attr.max_qp_wr <<std::endl;
-    std::cout << "maximum query pair number is" << device_attr.max_qp
-              << std::endl;
-    std::cout << "maximum completion queue number is" << device_attr.max_cq
-              << std::endl;
-    std::cout << "maximum memory region number is" << device_attr.max_mr
-              << std::endl;
-    std::cout << "maximum memory region size is" << device_attr.max_mr_size
-              << std::endl;
+//    std::cout << "maximum outstanding wr number is"  << device_attr.max_qp_wr <<std::endl;
+//    std::cout << "maximum query pair number is" << device_attr.max_qp
+//              << std::endl;
+//    std::cout << "maximum completion queue number is" << device_attr.max_cq
+//              << std::endl;
+//    std::cout << "maximum memory region number is" << device_attr.max_mr
+//              << std::endl;
+//    std::cout << "maximum memory region size is" << device_attr.max_mr_size
+//              << std::endl;
 
     if (ibv_query_gid(ctx, port, gidIndex, &context->gid)) {
         Debug::notifyError("could not get gid for port: %d, gidIndex: %d", port,

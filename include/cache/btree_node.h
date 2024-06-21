@@ -20,7 +20,7 @@ namespace cachepush {
 enum class PageType : uint8_t { BTreeInner = 1, BTreeLeaf = 2 };
 static const uint64_t swizzle_tag = 1ULL << 63;
 static const uint64_t swizzle_hide = (1ULL << 63) - 1;
-static const uint64_t pageSize = 1024; // 1KB
+static const uint64_t pageSize = 2048; // 1KB
 static const uint64_t megaLevel =
     4; // 4 level as a Bigger Node to do coarse-grained distribution
 // Level 0, 1, ..., MegaLevel -1 are grouped as a sub-tree

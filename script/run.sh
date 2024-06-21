@@ -40,7 +40,7 @@ do
     do 
         for idx in 0
         do
-          for cache_size in 1 2 3
+          for cache_size in 1 2
                   do
             for t in 4
             do
