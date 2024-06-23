@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #ops
-read=(100 50 95 0 0)
-insert=(0 0 0 100 5)
-update=(0 50 5 0 0)
-delete=(0 0 0 0 0)
-range=(0 0 0 0 95)
+read=(100 50 95 0 0 0)
+insert=(0 0 0 0 100 5)
+update=(0 50 5 100 0 0)
+delete=(0 0 0 0 0 0)
+range=(0 0 0 0 0 95)
 
 #fixed-op
 readonly=(100 0 0 0 0)
@@ -36,7 +36,7 @@ tune=0
 #./clear_hugepage.sh
 for uni in 1 0
 do 
-    for op in 0 1 2
+    for op in 3
     do 
         for idx in 0
         do
