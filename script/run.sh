@@ -19,7 +19,7 @@ cache=(0 16 32 64 128 256 512 1024 2048 8192)
 uniform=(0 1)
 zipf=(0.99)
 #bulk=50
-bulk=2000
+bulk=2000 # 2 Billion
 warmup=100
 runnum=50
 nodenum=8
@@ -37,7 +37,7 @@ tune=0
 #./clear_hugepage.sh
 for uni in 1 0
 do 
-    for op in 3
+    for op in 0 1 2 3
     do 
         for idx in 0
         do
