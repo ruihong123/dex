@@ -100,7 +100,7 @@ constexpr uint64_t dsmSize = 36; // GB  [CONFIG]
 constexpr uint64_t kChunkSize = 32 * MB;
 
 // RDMA buffer
-constexpr uint64_t rdmaBufferSize = 2; // GB  [CONFIG]
+constexpr uint64_t rdmaBufferSize = 1; // GB  [CONFIG]
 constexpr int64_t aligned_cache = ~((1ULL << 6) - 1);
 constexpr int64_t kPerThreadRdmaBuf =
     (rdmaBufferSize * define::GB / MAX_APP_THREAD) & aligned_cache;
