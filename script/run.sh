@@ -37,11 +37,11 @@ tune=0
 #./clear_hugepage.sh
 for uni in 1 0
 do 
-    for op in 0 1 2 3
+    for op in 1 2 3 4
     do 
         for idx in 0
         do
-          for cache_size in 7
+          for cache_size in 8
                   do
             for t in 4
             do
