@@ -18,8 +18,9 @@ mem_threads=(0 4)
 cache=(0 16 32 64 128 256 512 1024 2048 8192)
 uniform=(0 1)
 zipf=(0.99)
-bulk=50
-warmup=10
+#bulk=50
+bulk=2000
+warmup=100
 runnum=50
 nodenum=8
 
@@ -40,7 +41,7 @@ do
     do 
         for idx in 0
         do
-          for cache_size in 1 2
+          for cache_size in 7
                   do
             for t in 4
             do
