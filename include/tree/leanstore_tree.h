@@ -449,12 +449,12 @@ public:
 //    if (dsm_->getMyNodeID() == 0) {
       set_left_bound(std::numeric_limits<Key>::min());
       set_right_bound(std::numeric_limits<Key>::max());
-//      std::sort(bulk_array, bulk_array + bulk_load_num);
+      std::sort(bulk_array, bulk_array + bulk_load_num);
       for (uint64_t i = 0; i < bulk_load_num; ++i) {
         // std::cout << "Insert " << i << " key: " << bulk_array[i] <<
         // std::endl;
-//        insert_single(bulk_array[i], bulk_array[i] + 1);
-          insert(bulk_array[i], bulk_array[i] + 1);
+        insert_single(bulk_array[i], bulk_array[i] + 1);
+//          insert(bulk_array[i], bulk_array[i] + 1);
       }
 
       min_key_ = bulk_array[0];

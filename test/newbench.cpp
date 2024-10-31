@@ -446,8 +446,8 @@ void parse_args(int argc, char *argv[]) {
 
 void bulk_load() {
   // Only one compute node is allowed to do the bulkloading
-  tree->bulk_load(bulk_array, bulk_load_num/kNodeCount);
-//    tree->bulk_load(bulk_array, bulk_load_num);
+//  tree->bulk_load(bulk_array, bulk_load_num/kNodeCount);
+    tree->bulk_load(bulk_array, bulk_load_num);
   if (partitioned && dsm->getMyNodeID() == 0) {
     assert(sharding.size() == (CNodeCount + 1));
     std::vector<Key> bound;
@@ -600,97 +600,97 @@ void generate_workload() {
   uint64_t *insert_array = nullptr;
 
   if (partitioned) {
-      left_bound = sharding[node_id];
-      right_bound = sharding[node_id + 1];
-      auto cluster_num = CNodeCount;
-      if (node_id == (cluster_num - 1)) {
-          right_bound = kKeySpace;
-      }
-      partition_space = right_bound - left_bound;
-
-      // std::cout << "Node ID = " << node_id << std::endl;
-      // std::cout << "Left bound = " << left_bound << std::endl;
-      // std::cout << "Right bound = " << right_bound << std::endl;
-//      uint64_t accumulated_bulk_num = 0;
-      int i = node_id;
-//      for (int i = 0; i < cluster_num; i++) {
-      uint64_t left_b = sharding[i];
-      uint64_t right_b = (i == (cluster_num - 1)) ? kKeySpace : sharding[i + 1];
-      std::mt19937 gen(0xc70f6907UL);
-      std::shuffle(&space_array[left_b], &space_array[right_b - 1], gen);
-      uint64_t bulk_num_per_node =
-              static_cast<uint64_t>(static_cast<double>(right_b - left_b + 1) /
-                                    kKeySpace * bulk_load_num);
-      uint64_t accumulated_bulk_num = i*bulk_num_per_node;
-
-      if (i == cluster_num - 1) {
-              bulk_num_per_node = bulk_load_num - accumulated_bulk_num;
-              // std::cout << "bulk_num_per_node = " << bulk_num_per_node <<
-              // std::endl; std::cout << "right_b - left_b = " << right_b - left_b <<
-              // std::endl; std::cout << "right_b = " << right_b << std::endl;
-              // std::cout << "left_b = " << left_b << std::endl;
-              assert(bulk_num_per_node <= (right_b - left_b + 1));
-      } else {
-          bulk_num_per_node =
-                  std::min<uint64_t>(bulk_num_per_node, right_b - left_b + 1);
-      }
-      std::cout << "Bulkload num in node " << i << " = " << bulk_num_per_node
-                << std::endl;
-      memcpy(&bulk_array[0], &space_array[left_b],
-             sizeof(uint64_t) * bulk_num_per_node);
-      accumulated_bulk_num += bulk_num_per_node;
-      if (left_b == left_bound) {
-          insert_array = space_array + left_b + bulk_num_per_node;
-          assert((left_b + bulk_num_per_node + warmup_insert_key_num +
-                  workload_insert_key_num) <= right_b);
-      }
+//      left_bound = sharding[node_id];
+//      right_bound = sharding[node_id + 1];
+//      auto cluster_num = CNodeCount;
+//      if (node_id == (cluster_num - 1)) {
+//          right_bound = kKeySpace;
 //      }
-//      assert(accumulated_bulk_num == bulk_load_num);
-
-
-//    left_bound = sharding[node_id];
-//    right_bound = sharding[node_id + 1];
-//    auto cluster_num = CNodeCount;
-//    if (node_id == (cluster_num - 1)) {
-//      right_bound = kKeySpace;
-//    }
-//    partition_space = right_bound - left_bound;
+//      partition_space = right_bound - left_bound;
 //
-//    // std::cout << "Node ID = " << node_id << std::endl;
-//    // std::cout << "Left bound = " << left_bound << std::endl;
-//    // std::cout << "Right bound = " << right_bound << std::endl;
-//    uint64_t accumulated_bulk_num = 0;
-//    for (int i = 0; i < cluster_num; i++) {
+//      // std::cout << "Node ID = " << node_id << std::endl;
+//      // std::cout << "Left bound = " << left_bound << std::endl;
+//      // std::cout << "Right bound = " << right_bound << std::endl;
+////      uint64_t accumulated_bulk_num = 0;
+//      int i = node_id;
+////      for (int i = 0; i < cluster_num; i++) {
 //      uint64_t left_b = sharding[i];
 //      uint64_t right_b = (i == (cluster_num - 1)) ? kKeySpace : sharding[i + 1];
 //      std::mt19937 gen(0xc70f6907UL);
 //      std::shuffle(&space_array[left_b], &space_array[right_b - 1], gen);
 //      uint64_t bulk_num_per_node =
-//          static_cast<uint64_t>(static_cast<double>(right_b - left_b + 1) /
-//                                kKeySpace * bulk_load_num);
+//              static_cast<uint64_t>(static_cast<double>(right_b - left_b + 1) /
+//                                    kKeySpace * bulk_load_num);
+//      uint64_t accumulated_bulk_num = i*bulk_num_per_node;
+//
 //      if (i == cluster_num - 1) {
-//        bulk_num_per_node = bulk_load_num - accumulated_bulk_num;
-//        // std::cout << "bulk_num_per_node = " << bulk_num_per_node <<
-//        // std::endl; std::cout << "right_b - left_b = " << right_b - left_b <<
-//        // std::endl; std::cout << "right_b = " << right_b << std::endl;
-//        // std::cout << "left_b = " << left_b << std::endl;
-//        assert(bulk_num_per_node <= (right_b - left_b + 1));
+//              bulk_num_per_node = bulk_load_num - accumulated_bulk_num;
+//              // std::cout << "bulk_num_per_node = " << bulk_num_per_node <<
+//              // std::endl; std::cout << "right_b - left_b = " << right_b - left_b <<
+//              // std::endl; std::cout << "right_b = " << right_b << std::endl;
+//              // std::cout << "left_b = " << left_b << std::endl;
+//              assert(bulk_num_per_node <= (right_b - left_b + 1));
 //      } else {
-//        bulk_num_per_node =
-//            std::min<uint64_t>(bulk_num_per_node, right_b - left_b + 1);
+//          bulk_num_per_node =
+//                  std::min<uint64_t>(bulk_num_per_node, right_b - left_b + 1);
 //      }
 //      std::cout << "Bulkload num in node " << i << " = " << bulk_num_per_node
 //                << std::endl;
-//      memcpy(&bulk_array[accumulated_bulk_num], &space_array[left_b],
+//      memcpy(&bulk_array[0], &space_array[left_b],
 //             sizeof(uint64_t) * bulk_num_per_node);
 //      accumulated_bulk_num += bulk_num_per_node;
 //      if (left_b == left_bound) {
-//        insert_array = space_array + left_b + bulk_num_per_node;
-//        assert((left_b + bulk_num_per_node + warmup_insert_key_num +
-//                workload_insert_key_num) <= right_b);
+//          insert_array = space_array + left_b + bulk_num_per_node;
+//          assert((left_b + bulk_num_per_node + warmup_insert_key_num +
+//                  workload_insert_key_num) <= right_b);
 //      }
-//    }
-//    assert(accumulated_bulk_num == bulk_load_num);
+////      }
+////      assert(accumulated_bulk_num == bulk_load_num);
+
+
+    left_bound = sharding[node_id];
+    right_bound = sharding[node_id + 1];
+    auto cluster_num = CNodeCount;
+    if (node_id == (cluster_num - 1)) {
+      right_bound = kKeySpace;
+    }
+    partition_space = right_bound - left_bound;
+
+    // std::cout << "Node ID = " << node_id << std::endl;
+    // std::cout << "Left bound = " << left_bound << std::endl;
+    // std::cout << "Right bound = " << right_bound << std::endl;
+    uint64_t accumulated_bulk_num = 0;
+    for (int i = 0; i < cluster_num; i++) {
+      uint64_t left_b = sharding[i];
+      uint64_t right_b = (i == (cluster_num - 1)) ? kKeySpace : sharding[i + 1];
+      std::mt19937 gen(0xc70f6907UL);
+      std::shuffle(&space_array[left_b], &space_array[right_b - 1], gen);
+      uint64_t bulk_num_per_node =
+          static_cast<uint64_t>(static_cast<double>(right_b - left_b + 1) /
+                                kKeySpace * bulk_load_num);
+      if (i == cluster_num - 1) {
+        bulk_num_per_node = bulk_load_num - accumulated_bulk_num;
+        // std::cout << "bulk_num_per_node = " << bulk_num_per_node <<
+        // std::endl; std::cout << "right_b - left_b = " << right_b - left_b <<
+        // std::endl; std::cout << "right_b = " << right_b << std::endl;
+        // std::cout << "left_b = " << left_b << std::endl;
+        assert(bulk_num_per_node <= (right_b - left_b + 1));
+      } else {
+        bulk_num_per_node =
+            std::min<uint64_t>(bulk_num_per_node, right_b - left_b + 1);
+      }
+      std::cout << "Bulkload num in node " << i << " = " << bulk_num_per_node
+                << std::endl;
+      memcpy(&bulk_array[accumulated_bulk_num], &space_array[left_b],
+             sizeof(uint64_t) * bulk_num_per_node);
+      accumulated_bulk_num += bulk_num_per_node;
+      if (left_b == left_bound) {
+        insert_array = space_array + left_b + bulk_num_per_node;
+        assert((left_b + bulk_num_per_node + warmup_insert_key_num +
+                workload_insert_key_num) <= right_b);
+      }
+    }
+    assert(accumulated_bulk_num == bulk_load_num);
   } else {
     partition_space = kKeySpace;
     left_bound = 0;
