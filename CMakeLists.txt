@@ -7,7 +7,7 @@ project(DEX)
 add_definitions(-UNDEBUG)
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -mssse3 -march=native")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O3 -mssse3 -march=native -ggdb")
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo")
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -g -O2 -mssse3 -march=native")
 else()
