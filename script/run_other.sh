@@ -35,7 +35,7 @@ tune=0
 
 #./hugepage.sh
 #./clear_hugepage.sh
-for uni in 0 1
+for uni in 1 0
 do
     for op in 1 2 3 4
     do
