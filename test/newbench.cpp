@@ -446,7 +446,7 @@ void parse_args(int argc, char *argv[]) {
 
 void bulk_load() {
   // Only one compute node is allowed to do the bulkloading
-  tree->bulk_load(bulk_array, bulk_load_num);
+  tree->bulk_load(bulk_array, bulk_load_num/kNodeCount);
   if (partitioned && dsm->getMyNodeID() == 0) {
     assert(sharding.size() == (CNodeCount + 1));
     std::vector<Key> bound;
