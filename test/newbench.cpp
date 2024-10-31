@@ -27,7 +27,7 @@
 // #define LATENCY 1
 // In this benchmark, I use highest several bits of the key to differentiate
 // different types of operation
-#define GLOBAL_WORKLOAD 1
+//#define GLOBAL_WORKLOAD 1
 // #define CHECK_CORRECTNESS 1
 
 namespace sherman {
