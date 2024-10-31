@@ -665,8 +665,10 @@ void generate_workload() {
     for (int i = 0; i < cluster_num; i++) {
       uint64_t left_b = sharding[i];
       uint64_t right_b = (i == (cluster_num - 1)) ? kKeySpace : sharding[i + 1];
-      std::mt19937 gen(0xc70f6907UL);
-      std::shuffle(&space_array[left_b], &space_array[right_b - 1], gen);
+//      std::mt19937 gen(0xc70f6907UL);
+//      std::shuffle(&space_array[left_b], &space_array[right_b - 1], gen);
+
+    // shuffle here takes too much time. We can just use the original order
       uint64_t bulk_num_per_node =
           static_cast<uint64_t>(static_cast<double>(right_b - left_b + 1) /
                                 kKeySpace * bulk_load_num);
