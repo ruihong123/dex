@@ -20,7 +20,7 @@ uniform=(0 1)
 zipf=(0.99)
 #bulk=50
 bulk=2000 # 2 Billion
-warmup=100
+warmup=200
 runnum=50
 nodenum=8
 

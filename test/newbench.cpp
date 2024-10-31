@@ -201,8 +201,13 @@ void thread_run(int id) {
       std::cout << "OP Type NOT MATCH!" << std::endl;
     }
     ++counter;
+      if (counter%100000 == 0 && id == 0){
+          printf("Node %d finish %d ops \n", node_id, counter);
+          fflush(stdout);
+      }
   }
   //}
+
 
   warmup_cnt.fetch_add(1);
   if (id == 0) {
@@ -721,8 +726,8 @@ void generate_workload() {
     }
   }
 
-  std::mt19937 gen(0xc70f6907UL);
-  std::shuffle(&warmup_array[0], &warmup_array[node_warmup_num - 1], gen);
+//  std::mt19937 gen(0xc70f6907UL);
+//  std::shuffle(&warmup_array[0], &warmup_array[node_warmup_num - 1], gen);
 
   std::cout << "Finish warmup workload generation" << std::endl;
   workload_array = new uint64_t[node_op_num];
