@@ -592,8 +592,10 @@ void generate_workload() {
   for (uint64_t i = 0; i < kKeySpace; ++i) {
     space_array[i] = i;
   }
-  bulk_array = new uint64_t[bulk_load_num/kNodeCount];
-  node_warmup_num = thread_warmup_num * kThreadCount;
+//  bulk_array = new uint64_t[bulk_load_num/kNodeCount];
+  bulk_array = new uint64_t[bulk_load_num];
+
+    node_warmup_num = thread_warmup_num * kThreadCount;
   node_op_num = thread_op_num * kThreadCount;
   uint64_t warmup_insert_key_num = (kInsertRatio / 100.0) * node_warmup_num;
   uint64_t workload_insert_key_num = (kInsertRatio / 100.0) * node_op_num;
