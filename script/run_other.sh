@@ -20,7 +20,7 @@ uniform=(0 1)
 zipf=(0.99)
 #bulk=50
 bulk=2000 # 2 Billion
-warmup=100
+warmup=200
 runnum=50
 nodenum=8
 
@@ -35,7 +35,7 @@ tune=0
 
 #./hugepage.sh
 #./clear_hugepage.sh
-for uni in 1 0
+for uni in 0 1
 do
     for op in 1 2 3 4
     do
@@ -46,7 +46,7 @@ do
             for t in 4
             do
 #                ./restartMemc.sh
-                ulimit -c 42000000
+                ulimit -c 38000000
                 sudo ../build/newbench $nodenum ${read[$op]} ${insert[$op]} ${update[$op]} ${delete[$op]} ${range[$op]} ${threads[$t]} ${mem_threads[1]} ${cache[$cache_size]} $uni ${zipf[0]} $bulk $warmup $runnum $correct $timebase $early $idx $rpc $admit $tune 8
                 sleep 2
             done
