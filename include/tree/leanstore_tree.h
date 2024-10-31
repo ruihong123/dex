@@ -446,7 +446,7 @@ public:
   }
 
   void bulk_load(Key *bulk_array, uint64_t bulk_load_num) {
-//    if (dsm_->getMyNodeID() == 0) {
+    if (dsm_->getMyNodeID() == 0) {
       set_left_bound(std::numeric_limits<Key>::min());
       set_right_bound(std::numeric_limits<Key>::max());
 //      std::sort(bulk_array, bulk_array + bulk_load_num);
@@ -459,7 +459,7 @@ public:
 
       min_key_ = bulk_array[0];
       max_key_ = bulk_array[bulk_load_num - 1];
-//    }
+    }
   }
 
   void set_shared(std::vector<Key> &bound) {
