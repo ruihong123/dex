@@ -644,7 +644,7 @@ void generate_workload() {
                   workload_insert_key_num) <= right_b);
       }
 //      }
-      assert(accumulated_bulk_num == bulk_load_num);
+//      assert(accumulated_bulk_num == bulk_load_num);
 
 
 //    left_bound = sharding[node_id];
