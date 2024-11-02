@@ -37,7 +37,7 @@ tune=0
 #./clear_hugepage.sh
 for uni in 1 0
 do 
-    for op in 1 2 3 4
+    for op in 0
     do 
         for idx in 0
         do

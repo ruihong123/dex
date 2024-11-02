@@ -462,6 +462,7 @@ void bulk_load() {
   //           << ", right bound = " << right_bound << std::endl;
   delete[] bulk_array;
   printf("node %d finish its bulkload\n", dsm->getMyNodeID());
+    fflush(stdout);
 }
 
 void generate_index() {
